@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Puntos de Recolección</h1>
+
+<form action="/guardar_punto" method="POST">
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="direccion" placeholder="Dirección">
+    <button type="submit">Guardar</button>
+</form>
+
+<hr>
+
+{% for p in puntos %}
+<div class="card">
+    <h3>{{ p.nombre }}</h3>
+    <p>{{ p.direccion }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

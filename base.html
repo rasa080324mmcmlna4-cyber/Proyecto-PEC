@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PEC</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#0b1020;
+    color:white;
+}
+
+nav{
+    background:#1a1440;
+    color:white;
+    padding:20px;
+    text-align:center;
+}
+
+.menu{
+    background:#2a1b5a;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:10px;
+    padding:15px;
+}
+
+.menu a{
+    text-decoration:none;
+}
+
+.menu button{
+    background:#ffffff;
+    color:#2a1b5a;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.menu button:hover{
+    background:#8b5cf6;
+    color:white;
+}
+
+.logout-btn{
+    background:#dc2626 !important;
+    color:white !important;
+}
+
+.logout-btn:hover{
+    background:#ef4444 !important;
+}
+
+.container{
+    width:90%;
+    margin:auto;
+    margin-top:30px;
+}
+
+.card{
+    background:#141a33;
+    padding:20px;
+    border-radius:15px;
+    margin-bottom:20px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.4);
+}
+
+h1,h2,h3{
+    color:#a78bfa;
+}
+
+input,
+select,
+button{
+    width:100%;
+    padding:12px;
+    margin-top:10px;
+    border-radius:8px;
+    border:none;
+}
+
+input,
+select{
+    background:#1f2547;
+    color:white;
+}
+
+.form-btn{
+    background:#8b5cf6;
+    color:white;
+    border:none;
+}
+
+.form-btn:hover{
+    background:#a78bfa;
+}
+
+</style>
+
+</head>
+<body>
+
+<nav>
+    <h1>♻ PEC</h1>
+</nav>
+
+<div class="menu">
+
+    <a href="/">
+        <button>🏠 Inicio</button>
+    </a>
+
+    {% if session.get("rol") == "admin" %}
+
+    <a href="/usuarios">
+        <button>👤 Usuarios</button>
+    </a>
+
+    <a href="/rutas">
+        <button>🛣 Rutas</button>
+    </a>
+
+    <a href="/residuos">
+        <button>♻ Residuos</button>
+    </a>
+
+    <a href="/puntos">
+        <button>📍 Puntos</button>
+    </a>
+
+    <a href="/campanas">
+        <button>📢 Campañas</button>
+    </a>
+
+    {% endif %}
+
+    <a href="/contactos">
+        <button>📞 Contactos</button>
+    </a>
+
+    <a href="/reportes">
+        <button>📋 Reportes</button>
+    </a>
+
+    <a href="/logout">
+        <button class="logout-btn"> Cerrar Sesión</button>
+    </a>
+
+</div>
+
+<div class="container">
+    {% block content %}{% endblock %}
+</div>
+
+</body>
+</html>

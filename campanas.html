@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Campañas</h1>
+
+<form action="/guardar_campana" method="POST">
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="date" name="fecha">
+    <button type="submit">Guardar</button>
+</form>
+
+<hr>
+
+{% for c in campanas %}
+<div class="card">
+    <h3>{{ c.nombre }}</h3>
+    <p>{{ c.fecha }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}

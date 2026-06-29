@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Contactos</h1>
+
+<form action="/guardar_contacto" method="POST">
+
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="text" name="telefono" placeholder="Teléfono">
+    <input type="text" name="mensaje" placeholder="Mensaje">
+
+    <button type="submit">Guardar</button>
+
+</form>
+
+<hr>
+
+{% for c in contactos %}
+
+<div class="card">
+
+    <h3>{{ c.nombre }}</h3>
+    <p>{{ c.telefono }}</p>
+    <p>{{ c.mensaje }}</p>
+
+    <a href="/eliminar_contacto/{{ loop.index0 }}">
+        <button style="background:red;color:white;">Eliminar</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

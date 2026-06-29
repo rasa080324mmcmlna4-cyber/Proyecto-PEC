@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Usuarios</h1>
+
+<form action="/guardar_usuario" method="POST">
+
+    <input type="text" name="nombre" placeholder="Nombre">
+    <input type="email" name="correo" placeholder="Correo">
+
+    <select name="rol">
+        <option value="admin">Administrador</option>
+        <option value="usuario">Usuario</option>
+    </select>
+
+    <button type="submit">Registrar</button>
+
+</form>
+
+<hr>
+
+{% for u in usuarios %}
+
+<div class="card">
+
+    <h3>{{ u.nombre }}</h3>
+    <p>{{ u.correo }}</p>
+    <p>{{ u.rol }}</p>
+
+    <a href="/editar_usuario/{{ loop.index0 }}">
+        <button style="background:orange;color:white;">Editar</button>
+    </a>
+
+    <a href="/eliminar_usuario/{{ loop.index0 }}">
+        <button style="background:red;color:white;">Eliminar</button>
+    </a>
+
+</div>
+
+{% endfor %}
+
+{% endblock %}

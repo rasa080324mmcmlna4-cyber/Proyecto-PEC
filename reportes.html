@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Reportes</h1>
+
+<form action="/guardar_reporte" method="POST">
+    <input type="text" name="descripcion" placeholder="Descripción">
+    <input type="text" name="ubicacion" placeholder="Ubicación">
+    <button type="submit">Reportar</button>
+</form>
+
+<hr>
+
+{% for r in reportes %}
+<div class="card">
+    <h3>{{ r.descripcion }}</h3>
+    <p>{{ r.ubicacion }}</p>
+    <p>{{ r.estado }}</p>
+</div>
+{% endfor %}
+
+{% endblock %}
