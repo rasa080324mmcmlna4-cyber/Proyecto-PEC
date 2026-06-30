@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, session
 from functools import wraps
+import os  # Agregado para leer las variables de entorno de Railway
 
 app = Flask(__name__)
 app.secret_key = "PEC"
@@ -28,40 +29,29 @@ def login_requerido(f):
 def solo_admin(f):
     @wraps(f)
     def decorador(*args, **kwargs):
-
         if session.get("rol") != "admin":
             return redirect("/")
-
         return f(*args, **kwargs)
-
     return decorador
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-
     error = None
-
     if request.method == "POST":
-
         clave = request.form["clave"]
         password = request.form["password"]
 
         if clave in USUARIOS_SISTEMA:
-
             if password == USUARIOS_SISTEMA[clave]["password"]:
-
                 session["usuario"] = clave
                 session["rol"] = USUARIOS_SISTEMA[clave]["rol"]
-
                 return redirect("/")
 
         error = "Usuario o contraseña incorrectos"
-
     return render_template("login.html", error=error)
 
 @app.route("/logout")
 def logout():
-
     session.clear()
     return redirect("/login")
 
@@ -265,4 +255,7 @@ def guardar_reporte():
 # ---------------- EJECUTAR ----------------
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    # Lee el puerto que Railway le asigne al contenedor, o usa 5000 por defecto de forma local
+    port = int(os.environ.get("PORT", 5000))
+    # Escucha en todas las interfaces de red ('0.0.0.0') para que sea accesible públicamente
+    app.run(host="0.0.0.0", port=port, debug=True)
